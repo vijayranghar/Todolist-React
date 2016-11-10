@@ -45,24 +45,37 @@
         }
 
         addItem(e){
+            console.log(this);
+            var itemArray = this.state.items;
+            itemArray.push({
+                text:this.inputText.value,
+                time:Date.now()
+            });
+            console.log(this.inputText.value)
 
+            this.setState({
+                items:itemArray
+            });
+            console.log(itemArray);
+            e.preventDefault();
         }
 
         render(){
             return (<div className="todoListMain">
                     <div className="header">
-                    <form onSubmit={this.addItem() }>
-    <input placeholder="enter task">
-            </input>
-            <button type="submit">add</button>
-            <p>{this.state.items}</p>
-    </form>
-    </div>
-    </div>
-    );
-    }
-    }
+                    <form onSubmit={(e)=>this.addItem(e)}>
+                          <input placeholder="enter task" ref={(input) => this.inputText=input} />
+                          <button type="submit">add</button>
+                          <p>{this.state.items}</p>
+                    </form>
+                    </div>
+                    </div>
+                    );
+                }
+    } //TodoList component
+
     var destination = document.querySelector("#container");
+
     ReactDOM.render(
     <TodoList/>,
             destination
