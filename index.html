@@ -38,6 +38,24 @@
 
 </div>
 <script type="text/babel">
+
+    class TodoItems extends React.Component{
+
+        render(){
+                console.log(this.props)
+            var todoEntries = this.props.listTodo.map((items)=>{
+                            return(<li key={items.time}>{items.text}</li>);
+                 });
+
+                return(<div><h1>heading</h1>
+                        <ul>
+                            {todoEntries}
+                        </ul>
+                       </div>
+                        )
+            }
+    }
+
     class TodoList extends React.Component{
         constructor(props){
             super(props);
@@ -64,9 +82,11 @@
                     <form onSubmit={(e)=>this.addItem(e)}>
                           <input placeholder="enter task" ref={(input) => this.inputText=input} />
                           <button type="submit">add</button>
-                          <p>{this.state.items}</p>
                     </form>
                     </div>
+
+                    <TodoItems listTodo={this.state.items} />
+
                     </div>
                     );
                 }
