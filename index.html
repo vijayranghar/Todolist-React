@@ -7,6 +7,21 @@
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <style>
+        h2{
+            font-weight: 300;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            width: 300px;
+            border-radius: 7px;
+        }
         body {
             padding: 50px;
             background-color: #66CCFF;
@@ -31,6 +46,20 @@
             border: 2px solid #003399;
             cursor: pointer;
         }
+        .delete{
+            float: right;
+            background: red;
+            display: inline-block;
+            color: #fff;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 20px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -42,12 +71,13 @@
     class TodoItems extends React.Component{
 
         render(){
-                console.log(this.props)
-            var todoEntries = this.props.listTodo.map((items)=>{
-                            return(<li key={items.time}>{items.text}</li>);
+
+                var todoEntries = this.props.listTodo.map((items,index)=>{
+                            return(<li key={items.time}>{items.text}
+                                    <span className="delete" onClick={ this.props.deleteHandler.bind(this, index)}>X</span></li>);
                  });
 
-                return(<div><h1>heading</h1>
+                return(<div><h2>Todo List</h2>
                         <ul>
                             {todoEntries}
                         </ul>
@@ -73,9 +103,13 @@
             this.setState({
                 items:itemArray
             });
+            this.inputText.value="";
             e.preventDefault();
         }
 
+        deleteItem(index){
+           this.setState(this.state.items.splice(index,1))
+        }
         render(){
             return (<div className="todoListMain">
                     <div className="header">
@@ -85,7 +119,7 @@
                     </form>
                     </div>
 
-                    <TodoItems listTodo={this.state.items} />
+                    <TodoItems listTodo={this.state.items} deleteHandler={this.deleteItem.bind(this)} />
 
                     </div>
                     );
