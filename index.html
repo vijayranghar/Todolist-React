@@ -45,18 +45,16 @@
         }
 
         addItem(e){
-            console.log(this);
+
             var itemArray = this.state.items;
             itemArray.push({
                 text:this.inputText.value,
                 time:Date.now()
             });
-            console.log(this.inputText.value)
 
             this.setState({
                 items:itemArray
             });
-            console.log(itemArray);
             e.preventDefault();
         }
 
