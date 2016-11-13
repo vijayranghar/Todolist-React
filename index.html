@@ -10,7 +10,7 @@
         h2{
             display: inline-block;
             margin-right: 150px;
-            margin-bottom: 0;
+            margin-bottom: 10px;
             font-size: 16px;
             text-transform: uppercase;
         }
@@ -18,12 +18,12 @@
             cursor: pointer;
             font-size: 12px;
         }
-        .hide{
+      /*  .hide{
             display: none;
         }
         .show{
             display: block;
-        }
+        }*/
         ul {
             list-style: none;
             margin: 0;
@@ -31,7 +31,6 @@
             position: relative;
             width: 300px;
             background: white;
-            border: 1px solid;
             border-color: #dfdcdc #d9d6d6 #ccc;
             border-radius: 2px;
             -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -127,10 +126,11 @@
                  });
 
                 return(<div><h2>Todo List</h2>
-                        <span onClick={this.handleShowHide.bind(this)}>show/hide</span>
-                        <ul className={listStatus}>
+                        <span onClick={this.handleShowHide.bind(this)}>show list</span>
+                        {this.state.isOpen && (<ul>
                             {todoEntries}
-                        </ul>
+                          </ul>)
+                        }
                        </div>
                         )
             }
