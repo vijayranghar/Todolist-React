@@ -8,7 +8,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <style>
         h2{
-            font-weight: 300;
+            display: inline-block;
+            margin-right: 150px;
+            margin-bottom: 0;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+        h2+span{
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .hide{
+            display: none;
+        }
+        .show{
+            display: block;
         }
         ul {
             list-style: none;
@@ -90,16 +104,31 @@
 <script type="text/babel">
 
     class TodoItems extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                isOpen: true
+            }
 
+        }
+        handleShowHide(){
+            this.setState({
+                isOpen : !this.state.isOpen
+            })
+            console.log(this.state.isOpen)
+        }
         render(){
-
+                let listStatus = "hide";
+                if(this.state.isOpen)
+                    listStatus = "show";
                 var todoEntries = this.props.listTodo.map((items,index)=>{
                             return(<li key={items.time}>{items.text}
                                     <span className="delete" onClick={ this.props.deleteHandler.bind(this, index)}>X</span></li>);
                  });
 
                 return(<div><h2>Todo List</h2>
-                        <ul>
+                        <span onClick={this.handleShowHide.bind(this)}>show/hide</span>
+                        <ul className={listStatus}>
                             {todoEntries}
                         </ul>
                        </div>
